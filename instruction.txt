@@ -63,10 +63,10 @@ requirments-dev.txt
             - 컨테이너이미지 스냅샷 로컬 저장:
                 docker commit django_web django_web
             - 저장된 이미지에 태그달기
-                docker tag django_web cosmosinhand/django_web
+                docker image tag django_web cosmosinhand/django_web
             - 태크달린 이미지 도커허브 저장소에 푸시하기
                 docker login
-                docker push cosmosinhand/django_web
+                docker image push cosmosinhand/django_web
         
         # jupyter lab실행하기
             - jupyter lab --allow-root 

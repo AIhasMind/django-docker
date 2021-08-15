@@ -13,7 +13,7 @@ RUN apk update
 RUN apk add chromium
 RUN apk add chromium-chromedriver
 
-
+# 파이썬 패키지설치환경
 RUN apk add --update --no-cache python3-dev \
                         gcc \
                         libc-dev \
@@ -22,7 +22,10 @@ RUN apk add --update --no-cache postgresql-client jpeg-dev
 RUN apk add --update --no-cache --virtual .tmp-build-deps \
     gcc libc-dev linux-headers postgresql-dev musl-dev zlib zlib-dev
 RUN apk add --update --no-cache g++ gcc libxslt-dev
+
+# git 설치
 RUN apk add --update --no-cache git
+
 # 컨테이너의 작업디렉토리 /code/를 만든다.
 WORKDIR /code
 COPY requirements-dev.txt requirements-dev.txt
@@ -31,8 +34,11 @@ RUN pip3 install --upgrade pip setuptools wheel
 
 # jupyterlab작동을 위한 pyzmq 설치에 필요한 것들
 RUN apk update && apk add build-base libzmq musl-dev python3 python3-dev zeromq-dev
+# scrapy 설치를 위한 crytography 설치환경
+RUN apk add gcc musl-dev python3-dev libffi-dev openssl-dev cargo
 
 # 주요 python packages
+RUN pip install --upgrade pip
 RUN pip3 install -r requirements-dev.txt
 
 # 토치 cpu버전
